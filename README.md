@@ -12,7 +12,10 @@ docker pull mysql
 
 ## Usage
 
-Image MySql debe estar en 'mire' y asignar user: root, pass: 123456, create bd: client / account / movement
+Image MySql debe estar en 'mired' y asignar 
+user: root
+pass: 123456
+create bd: client/account/movement
 
 ```python
 import foobar
