@@ -1,6 +1,6 @@
 # Prueba Técnica
 
-Microservicios Client, Account y Movement.
+Microservicios Customer, Account y Movement.
 
 ## Instalación
 
