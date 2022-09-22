@@ -12,14 +12,14 @@ docker pull mysql
 
 ## Uso
 
-Image MySql debe estar en la red **'mired'** y asignar **user:** root, **pass:** 123456, create **bd:** client/account/movement
+Image MySql debe estar en la red **'mired'** y asignar **user:** root, **pass:** 123456, create **bd:** customer/account/movement
 
 ```python
 import foobar
 
 # image y container 'Customer'
-docker build -t client:1.0 .
-docker create -p4000:4000 --name client --network mired client:1.0
+docker build -t customer:1.0 .
+docker create -p4000:4000 --name customer --network mired customer:1.0
 
 # image y container 'account'
 docker build -t account:1.0 .
