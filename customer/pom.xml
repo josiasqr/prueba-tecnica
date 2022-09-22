@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.pe</groupId>
-	<artifactId>client</artifactId>
+	<artifactId>customer</artifactId>
 	<version>1.0</version>
-	<name>client</name>
+	<name>customer</name>
 	<description>Client project for Spring Boot and JPA</description>
 	<properties>
 		<java.version>11</java.version>

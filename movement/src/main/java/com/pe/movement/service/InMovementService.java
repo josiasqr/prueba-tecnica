@@ -50,6 +50,7 @@ public class InMovementService implements MovementService {
       account.setInitialBalance(account.getInitialBalance() + movement.getAmount());
       accountClient.updateAccount(account, movement.getNumberAccount());
 
+      movement.setBalance(account.getInitialBalance());
       return movementRepository.save(movement);
     }
     else if (movement.getType().equals(RETIRO)) {
@@ -59,10 +60,12 @@ public class InMovementService implements MovementService {
       account.setInitialBalance(account.getInitialBalance() - movement.getAmount());
       accountClient.updateAccount(account, movement.getNumberAccount());
 
+      movement.setBalance(account.getInitialBalance());
       movement.setAmount(movement.getAmount() * -1);
       return movementRepository.save(movement);
     }
 
+    movement.setBalance(account.getInitialBalance());
     return movementRepository.save(movement);
   }
 }

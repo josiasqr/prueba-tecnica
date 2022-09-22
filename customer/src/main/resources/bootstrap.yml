@@ -5,13 +5,13 @@ server:
     include-binding-errors: always
 spring:
   application:
-    name: client
+    name: customer
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: update
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${HOST_MYSQL}:3306/client
+    url: jdbc:mysql://${HOST_MYSQL}:3306/customer
     username: root
     password: 123456

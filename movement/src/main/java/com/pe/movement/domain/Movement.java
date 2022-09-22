@@ -1,6 +1,5 @@
 package com.pe.movement.domain;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -24,6 +23,7 @@ public class Movement {
   private Long numberAccount;
   private Type type;
   private Double amount;
+  private Double balance;
   private LocalDateTime registrationDate;
 
   public String code() {

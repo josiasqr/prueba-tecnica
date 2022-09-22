@@ -11,5 +11,6 @@ public class Movement {
   private Long numberAccount;
   private Type type;
   private Double amount;
+  private Double balance;
   private LocalDateTime registrationDate;
 }
