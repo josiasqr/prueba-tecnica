@@ -17,7 +17,7 @@ Image MySql debe estar en la red **'mired'** y asignar **user:** root, **pass:**
 ```python
 import foobar
 
-# image y container 'client'
+# image y container 'Customer'
 docker build -t client:1.0 .
 docker create -p4000:4000 --name client --network mired client:1.0
 
