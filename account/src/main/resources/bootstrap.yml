@@ -1,0 +1,17 @@
+server:
+  port: 4001
+  error:
+    include-message: always
+    include-binding-errors: always
+spring:
+  application:
+    name: account
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${HOST_MYSQL}:3306/account
+    username: root
+    password: 123456
