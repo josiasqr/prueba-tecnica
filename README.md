@@ -27,4 +27,4 @@ docker create -p4001:4001 --name account --network mired account:1.0
 
 # image y container 'movement'
 docker build -t movement:1.0 .
-docker create -p4001:4001 --name movement --network mired movement:1.0
+docker create -p4002:4002 --name movement --network mired movement:1.0
