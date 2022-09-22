@@ -2,7 +2,7 @@
 
 Microservicios Client, Accountm y Movement.
 
-## Installation
+## Instalación
 
 Se necesita descargar una imagen de MySql y además crear las imagenes con el .jar   
 
@@ -10,12 +10,9 @@ Se necesita descargar una imagen de MySql y además crear las imagenes con el .j
 docker pull mysql
 ```
 
-## Usage
+## Uso
 
-Image MySql debe estar en 'mired' y asignar 
-user: root
-pass: 123456
-create bd: client/account/movement
+Image MySql debe estar en la red **'mired'** y asignar **user:** root, **pass:** 123456, create **bd:** client/account/movement
 
 ```python
 import foobar
