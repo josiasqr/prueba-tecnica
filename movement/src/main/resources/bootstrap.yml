@@ -14,5 +14,5 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://${HOST_MYSQL}:3306/movements
     username: root
-    password: 123456
+    password:
 
