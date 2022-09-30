@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Random;
 
@@ -23,17 +24,19 @@ public class Account {
 
   @Column(unique = true, nullable = false)
   private Long numberAccount;
-  private Type type;
-  private Double initialBalance;
-  private Boolean status;
-  private LocalDateTime registrationDate;
 
-  public Boolean validateBalance(Double initialBalance) {
-    if (initialBalance > 0) {
-      return true;
-    }
-    return false;
-  }
+  @Enumerated(EnumType.STRING)
+  private Type type;
+
+  @NotNull(message = "initialBalance not be empty")
+  @Column(nullable = false)
+  private Double initialBalance;
+
+  @NotNull(message = "status not be empty")
+  @Column(nullable = false)
+  private Boolean status;
+
+  private LocalDateTime registrationDate;
 
   public Long number() {
     Random random = new Random();

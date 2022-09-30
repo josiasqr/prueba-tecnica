@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-09-2022 a las 18:04:09
+-- Tiempo de generación: 30-09-2022 a las 17:01:26
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -29,26 +29,22 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `movement` (
   `id` int(11) NOT NULL,
-  `amount` double DEFAULT NULL,
+  `amount` double NOT NULL,
+  `balance` double NOT NULL,
   `code` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `number_account` bigint(20) NOT NULL,
   `registration_date` datetime DEFAULT NULL,
-  `type` int(11) DEFAULT NULL
+  `type` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `movement`
 --
 
-INSERT INTO `movement` (`id`, `amount`, `code`, `number_account`, `registration_date`, `type`) VALUES
-(1, 2000, '63832', 1455771940314725937, '2022-09-22 10:57:43', 2),
-(2, 100, '170064', 3472248450928574498, '2022-09-22 10:57:57', 2),
-(3, 540, '914936', 5950238113080988691, '2022-09-22 10:59:58', 2),
-(4, 1000, '370215', 9205970723414603651, '2022-09-22 11:00:56', 2),
-(5, -575, '327519', 1455771940314725937, '2022-09-22 11:01:31', 1),
-(6, 600, '93975', 3472248450928574498, '2022-09-22 11:02:13', 0),
-(7, 150, '464338', 4848421429771643453, '2022-09-22 11:02:29', 0),
-(8, -540, '953872', 5950238113080988691, '2022-09-22 11:02:50', 1);
+INSERT INTO `movement` (`id`, `amount`, `balance`, `code`, `number_account`, `registration_date`, `type`) VALUES
+(1, 200, 200, '891630', 6480068923939122419, '2022-09-30 09:57:44', 'INITIAL'),
+(2, -10, 190, '55117', 6480068923939122419, '2022-09-30 09:59:49', 'RETIRO'),
+(3, 20, 210, '219968', 6480068923939122419, '2022-09-30 09:59:56', 'DEPOSITO');
 
 --
 -- Índices para tablas volcadas
@@ -69,7 +65,7 @@ ALTER TABLE `movement`
 -- AUTO_INCREMENT de la tabla `movement`
 --
 ALTER TABLE `movement`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

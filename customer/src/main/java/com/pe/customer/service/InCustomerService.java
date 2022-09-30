@@ -7,7 +7,10 @@ import com.pe.customer.client.MovementClient;
 import com.pe.customer.domain.Customer;
 import com.pe.customer.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,10 +21,8 @@ import java.util.Map;
 public class InCustomerService implements CustomerService {
   @Autowired
   private CustomerRepository customerRepository;
-
   @Autowired
   private AccountClient accountClient;
-
   @Autowired
   private MovementClient movementClient;
 
@@ -37,16 +38,18 @@ public class InCustomerService implements CustomerService {
   @Override
   public List<Map<String, Object>> reports(String identification, String dateStart, String dateEnd) {
     Customer customer = getIdentification(identification);
-    List<Account> accounts = accountClient.getListIdentification(identification).getBody();
+    if (customer == null) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "client not found with identification = " + identification);
+    }
 
+    List<Account> accounts = accountClient.getListIdentification(identification).getBody();
     List<Map<String, Object>> newMap = new ArrayList<>();
 
-    int cont=0;
-    for (Account acc: accounts) {
+    for (Account acc : accounts) {
       List<Movement> movements = movementClient.listNumberAccount(acc.getNumberAccount(), dateStart, dateEnd).getBody();
-      System.out.println("movements.size() = " + movements.size());
 
-      for (Movement mov: movements) {
+      int cont = 0;
+      for (Movement mov : movements) {
         Map<String, Object> report = new HashMap<>();
         report.put("Fecha", mov.getRegistrationDate());
         report.put("Cliente", customer.getName());

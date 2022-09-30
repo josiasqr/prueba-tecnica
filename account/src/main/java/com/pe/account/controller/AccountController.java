@@ -44,13 +44,14 @@ public class AccountController {
 
   @PostMapping
   public ResponseEntity<Account> createAccount(@Valid @RequestBody Account account, BindingResult errors) {
+    account.setNumberAccount(account.number());
+    account.setRegistrationDate(LocalDateTime.now());
     if (errors.hasErrors()) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, errors.getFieldError().getDefaultMessage());
     }
-    account.setNumberAccount(account.number());
-    account.setRegistrationDate(LocalDateTime.now());
 
-    return ResponseEntity.status(HttpStatus.CREATED).body(accountService.createAccount(account));
+    return ResponseEntity.status(HttpStatus.CREATED)
+      .body(accountService.createAccount(account));
   }
 
   @PutMapping("/{numberAccount}")
@@ -69,19 +70,18 @@ public class AccountController {
     acc.setInitialBalance(account.getInitialBalance());
     acc.setStatus(account.getStatus());
     acc.setRegistrationDate(LocalDateTime.now());
-
-    return ResponseEntity.status(HttpStatus.CREATED).body(accountService.updateAccount(acc));
+    return ResponseEntity.status(HttpStatus.CREATED)
+      .body(accountService.updateAccount(acc));
   }
 
   @DeleteMapping("/{numberAccount}")
   public ResponseEntity<Void> deleteAccount(@PathVariable("numberAccount") Long numberAccount) {
     Account account = accountService.getNumberAccount(numberAccount);
-
     if (account == null) {
       return ResponseEntity.notFound().build();
     }
-    accountService.deleteAccount(account);
 
+    accountService.deleteAccount(account);
     return ResponseEntity.ok().build();
   }
 }

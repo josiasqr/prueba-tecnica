@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-09-2022 a las 18:03:39
+-- Tiempo de generación: 30-09-2022 a las 17:00:56
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -29,24 +29,20 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `account` (
   `id` int(11) NOT NULL,
-  `identification_client` varchar(255) NOT NULL,
-  `initial_balance` double DEFAULT NULL,
+  `identification_client` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `initial_balance` double NOT NULL,
   `number_account` bigint(20) NOT NULL,
   `registration_date` datetime DEFAULT NULL,
-  `status` bit(1) DEFAULT NULL,
-  `type` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `status` bit(1) NOT NULL,
+  `type` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `account`
 --
 
 INSERT INTO `account` (`id`, `identification_client`, `initial_balance`, `number_account`, `registration_date`, `status`, `type`) VALUES
-(1, '78906523', 1425, 1455771940314725937, '2022-09-22 11:01:31', b'1', 1),
-(2, '76598321', 700, 3472248450928574498, '2022-09-22 11:02:13', b'1', 0),
-(3, '46578982', 150, 4848421429771643453, '2022-09-22 11:02:29', b'1', 1),
-(4, '76598321', 0, 5950238113080988691, '2022-09-22 11:02:50', b'1', 1),
-(5, '78906523', 1000, 9205970723414603651, '2022-09-22 11:00:56', b'1', 0);
+(1, '78654312', 210, 6480068923939122419, '2022-09-30 09:59:56', b'1', 'AHORROS');
 
 --
 -- Índices para tablas volcadas
@@ -67,7 +63,7 @@ ALTER TABLE `account`
 -- AUTO_INCREMENT de la tabla `account`
 --
 ALTER TABLE `account`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

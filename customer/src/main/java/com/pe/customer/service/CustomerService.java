@@ -7,7 +7,9 @@ import java.util.Map;
 
 public interface CustomerService {
   List<Customer> listCustomers();
+
   List<Map<String, Object>> reports(String identification, String dateStart, String dateEnd);
+
   Customer getIdentification(String identification);
 
   Customer createCustomer(Customer customer);

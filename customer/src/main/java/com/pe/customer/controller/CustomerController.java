@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
-import java.net.URI;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.List;
@@ -23,7 +22,7 @@ public class CustomerController {
   private CustomerService customerService;
 
   @GetMapping
-  public ResponseEntity<List<Customer>> listCustomers() {
+  public ResponseEntity<List<Customer>> lists() {
     return ResponseEntity.ok(customerService.listCustomers());
   }
 
@@ -31,25 +30,23 @@ public class CustomerController {
   public ResponseEntity<List<Map<String, Object>>> reports(@PathVariable("identification") String identification,
                                                            @RequestParam(name = "dateStart") String dateStart,
                                                            @RequestParam(name = "dateEnd") String dateEnd) {
-
     if (dateStart == null || dateEnd == null || identification == null) {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Falta identification, dateStart o dateEnd");
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "identification, dateStart o dateEnd are required");
     }
 
     try {
-      LocalDateTime start = LocalDateTime.parse(dateStart);
-      LocalDateTime end = LocalDateTime.parse(dateEnd);
+      LocalDateTime.parse(dateStart);
+      LocalDateTime.parse(dateEnd);
     } catch (DateTimeParseException e) {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Fechas no validas");
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "dateStart o dateEnd invalid");
     }
 
     return ResponseEntity.ok(customerService.reports(identification, dateStart, dateEnd));
   }
 
   @GetMapping("/{identification}")
-  public ResponseEntity<Customer> getCustomer(@PathVariable("identification") String identification) {
+  public ResponseEntity<Customer> get(@PathVariable("identification") String identification) {
     Customer customer = customerService.getIdentification(identification);
-
     if (customer == null) {
       return ResponseEntity.notFound().build();
     }
@@ -58,37 +55,38 @@ public class CustomerController {
   }
 
   @PostMapping
-  public ResponseEntity<Customer> createCustomer(@Valid @RequestBody Customer customer, BindingResult errors) {
+  public ResponseEntity<Customer> create(@Valid @RequestBody Customer customer, BindingResult errors) {
+    customer.setRegistrationDate(LocalDateTime.now());
     if (errors.hasErrors()) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, errors.getFieldError().getDefaultMessage());
     }
-    customer.setRegistrationDate(LocalDateTime.now());
 
-    return ResponseEntity.status(HttpStatus.CREATED).body(customerService.createCustomer(customer));
+    return ResponseEntity.status(HttpStatus.CREATED)
+      .body(customerService.createCustomer(customer));
   }
 
   @PutMapping("/{identification}")
-  public ResponseEntity<Customer> updateCustomer(@Valid @PathVariable("identification") String identification,
+  public ResponseEntity<Customer> update(@Valid @PathVariable("identification") String identification,
                                                  @RequestBody Customer customer, BindingResult errors) {
     if (errors.hasErrors()) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, errors.getFieldError().getDefaultMessage());
     }
 
-    Customer findCustomer = customerService.getIdentification(identification);
-    if (findCustomer == null) {
+    Customer acc = customerService.getIdentification(identification);
+    if (acc == null) {
       return ResponseEntity.notFound().build();
     }
 
-    findCustomer.setName(customer.getName());
-    findCustomer.setGender(customer.getGender());
-    findCustomer.setAge(customer.getAge());
-    findCustomer.setDirection(customer.getDirection());
-    findCustomer.setIdentification(customer.getIdentification());
-    findCustomer.setPhone(customer.getPhone());
-    findCustomer.setPassword(customer.getPassword());
-    findCustomer.setStatus(customer.getStatus());
-    findCustomer.setRegistrationDate(LocalDateTime.now());
-
-    return ResponseEntity.status(HttpStatus.CREATED).body(customerService.updateCustomers(findCustomer));
+    acc.setName(customer.getName());
+    acc.setGender(customer.getGender());
+    acc.setAge(customer.getAge());
+    acc.setDirection(customer.getDirection());
+    acc.setIdentification(customer.getIdentification());
+    acc.setPhone(customer.getPhone());
+    acc.setPassword(customer.getPassword());
+    acc.setStatus(customer.getStatus());
+    acc.setRegistrationDate(LocalDateTime.now());
+    return ResponseEntity.status(HttpStatus.CREATED)
+      .body(customerService.updateCustomers(acc));
   }
 }

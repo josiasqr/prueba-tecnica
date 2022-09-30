@@ -14,4 +14,10 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://${HOST_MYSQL}:3306/account
     username: root
-    password:
+    password: 123456
+feign:
+  client:
+    config:
+      default:
+        errorDecoder: com.pe.account.exception.feignErrorDecoder
+        loggerLevel: BASIC

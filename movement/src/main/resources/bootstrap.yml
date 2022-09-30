@@ -14,5 +14,10 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://${HOST_MYSQL}:3306/movements
     username: root
-    password:
-
+    password: 123456
+feign:
+  client:
+    config:
+      default:
+        errorDecoder: com.pe.movement.exception.feignErrorDecoder
+        loggerLevel: BASIC

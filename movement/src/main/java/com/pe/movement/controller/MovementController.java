@@ -29,7 +29,6 @@ public class MovementController {
   @GetMapping("/{code}")
   public ResponseEntity<Movement> getMovement(@PathVariable("code") String code) {
     Movement movement = movementService.getMovement(code);
-
     if (movement == null) {
       return ResponseEntity.notFound().build();
     }
@@ -41,27 +40,29 @@ public class MovementController {
   public ResponseEntity<List<Movement>> listNumberAccount(@PathVariable("numberAccount") Long numberAccount,
                                                           @RequestParam(name = "dateStart", required = false) String dateStart,
                                                           @RequestParam(name = "dateEnd", required = false) String dateEnd) {
+    if (dateStart == null || dateEnd == null || numberAccount == null) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "numberAccount, dateStart o dateEnd are required");
+    }
+
     try {
-      if (dateStart == null || dateEnd == null) {
-        return ResponseEntity.ok(movementService.listNumberAccount(numberAccount));
-      }
       LocalDateTime start = LocalDateTime.parse(dateStart);
       LocalDateTime end = LocalDateTime.parse(dateEnd);
 
       return ResponseEntity.ok(movementService.listNumberAccountAndDate(numberAccount, start, end));
     } catch (DateTimeParseException e) {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Fechas no validas");
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "dateStart and dateEnd are invalid");
     }
   }
 
   @PostMapping
   public ResponseEntity<Movement> createMovement(@Valid @RequestBody Movement movement, BindingResult errors) {
+    movement.setCode(movement.code());
+    movement.setRegistrationDate(LocalDateTime.now());
     if (errors.hasErrors()) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, errors.getFieldError().getDefaultMessage());
     }
-    movement.setCode(movement.code());
-    movement.setRegistrationDate(LocalDateTime.now());
 
-    return ResponseEntity.status(HttpStatus.CREATED).body(movementService.createMovement(movement));
+    return ResponseEntity.status(HttpStatus.CREATED)
+      .body(movementService.createMovement(movement));
   }
 }

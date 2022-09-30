@@ -22,7 +22,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:4000/clients/report",
+							"raw": "http://localhost:4000/clients/report/78906523?dateStart=2022-09-19T23:44:57&dateEnd=2022-09-23T23:44:57",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -30,7 +30,18 @@
 							"port": "4000",
 							"path": [
 								"clients",
-								"report"
+								"report",
+								"78906523"
+							],
+							"query": [
+								{
+									"key": "dateStart",
+									"value": "2022-09-19T23:44:57"
+								},
+								{
+									"key": "dateEnd",
+									"value": "2022-09-23T23:44:57"
+								}
 							]
 						}
 					},
@@ -43,7 +54,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Juan Osorio\",\r\n    \"gender\": \"Masculino\",\r\n    \"age\": 19,\r\n    \"direction\": \"13 junio y Equinoccial\",\r\n    \"identification\": \"46579804\",\r\n    \"phone\": \"097548965\",\r\n    \"password\": \"5678\",\r\n    \"status\": true\r\n}\r\n",
+							"raw": "{\r\n    \"name\": \"Karla\",\r\n    \"gender\": \"Femenino\",\r\n    \"age\": 12,\r\n    \"direction\": \"Lima - Peru\",\r\n    \"identification\": \"79534281\",\r\n    \"phone\": \"987654321\",\r\n    \"password\": \"\",\r\n    \"status\": true\r\n}\r\n   ",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -108,35 +119,6 @@
 							"path": [
 								"clients",
 								"8976346798057463"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "New Request",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Lucas Barrios\",\r\n    \"gender\": \"Masculino\",\r\n    \"age\": 25,\r\n    \"direction\": \"Lima Peru\",\r\n    \"identification\": \"89767463\",\r\n    \"phone\": \"987654321\",\r\n    \"password\": \"\",\r\n    \"status\": true,\r\n    \"registrationDate\": \"2022-09-21T19:08:00\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4000/clients/89767463",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"clients",
-								"89767463"
 							]
 						}
 					},

@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Random;
 
@@ -19,11 +21,20 @@ public class Movement {
   @Column(unique = true, nullable = false)
   private String code;
 
+  @NotNull(message = "numberAccount not be empty")
   @Column(nullable = false)
   private Long numberAccount;
+
+  @Enumerated(EnumType.STRING)
   private Type type;
+
+  @NotNull(message = "amount not be empty")
+  @Column(nullable = false)
   private Double amount;
+
+  @Column(nullable = false)
   private Double balance;
+
   private LocalDateTime registrationDate;
 
   public String code() {
